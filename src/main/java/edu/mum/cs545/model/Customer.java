@@ -20,11 +20,15 @@ public class Customer {
     private String lastName;
     private String email;
     private Date birthdate;
+    private String gender;
     private int zipCode;
     private String street;
     private String state;
-    private Long customerId;
+    private Long customerId;  
     private List<Account> accounts;
+    
+    
+    
     
     @Id
     @GeneratedValue
@@ -82,6 +86,16 @@ public class Customer {
         this.birthdate = birthdate;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+
+
     public int getZipCode() {
         return zipCode;
     }
@@ -105,6 +119,7 @@ public class Customer {
     public void setState(String state) {
         this.state = state;
     }
+    
     
     public void addAccount()
     {

@@ -57,13 +57,13 @@
                                 <p:message for="firstName" />
 
                                 <h:outputLabel value="LastName" />
-                                <p:inputText value="#{customerBean.lastName}"
+                                <p:inputText value="#{customerBean.customer.lastName}"
                                              id="lastName"></p:inputText>
                                 <p:message for="lastName" />
                                 
 
                                 <p:outputLabel for="birthdate" value="Date of Birth" />
-                                <p:calendar id="birthdate" value="#{customerBean.birthdate}"
+                                <p:calendar id="birthdate" value="#{customerBean.customer.birthdate}"
                                             locale="de" 
                                             navigator="true" 
                                             yearRange="c-100:c-16"
@@ -77,14 +77,14 @@
 
                                 <h:outputLabel value="Gender" />
                                 <h:selectOneRadio id="gender" 
-                                                  value="#{customerBean.gender}" >
+                                                  value="#{customerBean.customer.gender}" >
                                     <f:selectItem itemValue="M" itemLabel="M" />
                                     <f:selectItem itemValue="F" itemLabel="F" />
                                 </h:selectOneRadio>
                                 <p:message for="gender" />
 
                                 <h:outputLabel value="ZipCode" />
-                                <p:inputText value="#{customerBean.zipCode}"
+                                <p:inputText value="#{customerBean.customer.zipCode}"
                                              id="zipCode"
                                              required="true" 
                                              requiredMessage="Zip code is required"
@@ -96,7 +96,7 @@
 
 
                                 <h:outputLabel value="Street" />
-                                <p:inputText value="#{customerBean.street}"
+                                <p:inputText value="#{customerBean.customer.street}"
                                              id="street"
                                              required="true" 
                                              requiredMessage="Street is required"
@@ -108,7 +108,7 @@
 
 
                                 <h:outputLabel value="Email" />
-                                <p:inputText value="#{customerBean.email}"
+                                <p:inputText value="#{customerBean.customer.email}"
                                              id="email"
                                              validatorMessage="Invalid Email">
                                     <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   
