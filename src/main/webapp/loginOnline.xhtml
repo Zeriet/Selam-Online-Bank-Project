@@ -39,7 +39,19 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                   
+                    <h:form>
+                        
+                        <h:outputText value="#{msgs.loginHeader}"/>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="name" value=" #{msgs.userName} :" style="font-weight:bold" />
+                            <p:inputText id="name" value="#{customerBean.userName}" />
+                            <h:outputLabel for="password" value=" #{msgs.loginHeader} :" style="font-weight:bold" />
+                            <p:password id="password" value="#{customerBean.userPassword}" />
+                            <p:commandButton value="Submit" update="display" icon="ui-icon-check" />
+                            
+                        </h:panelGrid>
+                    </h:form>
                 </p:layoutUnit>
 
             </p:layout>
