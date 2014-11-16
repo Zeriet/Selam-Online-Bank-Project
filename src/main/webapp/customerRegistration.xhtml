@@ -12,7 +12,6 @@
                 <title>Online Banking</title>
             </f:facet>
         </h:head>
-
         <h:body>
 
             <p:layout fullPage="true">
@@ -39,9 +38,90 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
-                </p:layoutUnit>
+                    <h2>Registration Form</h2>
+                    <h:form>
+                        <p:fieldset legend="Registration Form" widgetVar="regWidget" style="width: 600px;">
+                            <h:panelGrid columns="3" width="550" border="0">
 
+                                <!--user name and password discussion-->
+
+                                <h:outputLabel value="FirstName" />
+                                <p:inputText value="#{customerBean.customer.firstName}"
+                                             id="firstName"
+                                             required="true" 
+                                             requiredMessage="FirstName is required"
+                                             validatorMessage="FirstName should be of length from 5 to 15 chars"
+                                             >
+                                    <f:validateLength minimum="5" maximum="15" for="firstName"></f:validateLength>
+                                </p:inputText>
+                                <p:message for="firstName" />
+
+                                <h:outputLabel value="LastName" />
+                                <p:inputText value="#{customerBean.lastName}"
+                                             id="lastName"></p:inputText>
+                                <p:message for="lastName" />
+                                
+
+                                <p:outputLabel for="birthdate" value="Date of Birth" />
+                                <p:calendar id="birthdate" value="#{customerBean.birthdate}"
+                                            locale="de" 
+                                            navigator="true" 
+                                            yearRange="c-100:c-16"
+                                            validatorMessage="Year shpule be in MM/dd/yyyy format"
+                                            pattern="MM/dd/yyyy"  >
+                                  <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </p:calendar> 
+                                <p:message for="birthdate" />
+                                
+
+
+                                <h:outputLabel value="Gender" />
+                                <h:selectOneRadio id="gender" 
+                                                  value="#{customerBean.gender}" >
+                                    <f:selectItem itemValue="M" itemLabel="M" />
+                                    <f:selectItem itemValue="F" itemLabel="F" />
+                                </h:selectOneRadio>
+                                <p:message for="gender" />
+
+                                <h:outputLabel value="ZipCode" />
+                                <p:inputText value="#{customerBean.zipCode}"
+                                             id="zipCode"
+                                             required="true" 
+                                             requiredMessage="Zip code is required"
+                                             validatorMessage="Zip code should be of length from _ to _ chars"
+                                             >
+                                    <f:validateLength minimum="2" maximum="15" for="zipCode"></f:validateLength>
+                                </p:inputText>
+                                <p:message for="zipCode" />
+
+
+                                <h:outputLabel value="Street" />
+                                <p:inputText value="#{customerBean.street}"
+                                             id="street"
+                                             required="true" 
+                                             requiredMessage="Street is required"
+                                             validatorMessage="Street should be of length from 4 to 25 chars"
+                                             >
+                                    <f:validateLength minimum="4" maximum="15" for="street"></f:validateLength>
+                                </p:inputText>
+                                <p:message for="street" />
+
+
+                                <h:outputLabel value="Email" />
+                                <p:inputText value="#{customerBean.email}"
+                                             id="email"
+                                             validatorMessage="Invalid Email">
+                                    <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   
+                                </p:inputText>
+                                <p:message for="email" />
+                                
+                                <p:commandButton value="Register" action="#{customerBean.register}" ajax="false"/>
+                                                                    
+                                <!--the action should create customerID-->
+                            </h:panelGrid>
+                        </p:fieldset>
+                    </h:form>
+                </p:layoutUnit>
             </p:layout>
 
         </h:body>
