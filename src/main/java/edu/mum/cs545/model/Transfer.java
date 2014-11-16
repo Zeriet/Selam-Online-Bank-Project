@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author ZWoldeab
  */
 @Entity
-public class History 
+public class Transfer 
 {
     private Long transferNumber;
     private Date transferDate;

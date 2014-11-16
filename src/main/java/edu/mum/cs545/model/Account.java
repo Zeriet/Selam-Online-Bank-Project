@@ -22,7 +22,7 @@ public class Account {
     private int PIN;
     private int cardNumber;
     private Customer customer;
-    private List<History> transfers;
+    private List<Transfer> transfers;
 
     @Id
     public Long getAccountNumber() {
@@ -39,12 +39,12 @@ public class Account {
         this.customer = customer;
     }
     
-    @OneToMany(mappedBy="account", targetEntity=History.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    public List<History> getTransfers() {
+    @OneToMany(mappedBy="account", targetEntity=Transfer.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    public List<Transfer> getTransfers() {
         return transfers;
     }
 
-    public void setTransfers(List<History> transfers) {
+    public void setTransfers(List<Transfer> transfers) {
         this.transfers = transfers;
     }
     

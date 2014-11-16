@@ -18,7 +18,7 @@ public class HibernateUtil
 		//Bring all annotated class here you want to use.
 		config.addAnnotatedClass(Customer.class);
 		config.addAnnotatedClass(Account.class);
-		config.addAnnotatedClass(History.class);
+		config.addAnnotatedClass(Transfer.class);
 		
 		config.configure();
 		
