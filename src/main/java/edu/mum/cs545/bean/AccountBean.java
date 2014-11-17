@@ -6,10 +6,30 @@
 
 package edu.mum.cs545.bean;
 
+import edu.mum.cs545.model.Account;
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
+
 /**
  *
  * @author zeriet
  */
-public class AccountBean {
+@Named
+@SessionScoped
+public class AccountBean implements Serializable {
+    
+ private Account account = new Account();   
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+ 
+  
     
 }
