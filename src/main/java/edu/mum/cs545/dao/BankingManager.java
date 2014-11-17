@@ -20,6 +20,7 @@ public class BankingManager
 		cust1.setEmail("cesc.joseph@gmail.com");
 		cust1.setZipCode(52557);
 		cust1.setState("Iowa");
+                cust1.setGender("M");
 		
 		Account acct = new Account();
 		acct.setAccountNumber(new Long(147258));
