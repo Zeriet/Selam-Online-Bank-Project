@@ -5,13 +5,16 @@
  */
 package edu.mum.cs545.dao;
 
-import edu.mum.cs545.model.Transfer;
+import edu.mum.cs545.model.User;
 
 /**
  *
- * @author fjoseph1313
+ * @author Senai
  */
-public interface TransferDAO extends GenericDAO<Transfer, Long> {
-    
-    
+public class HibernateUserDAO extends HibernateDAO<User, Long> implements UserDAO {
+
+    public HibernateUserDAO() {
+        super(User.class);
+    }
+
 }

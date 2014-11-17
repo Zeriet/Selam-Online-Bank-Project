@@ -9,18 +9,21 @@ package edu.mum.cs545.dao;
  *
  * @author fjoseph1313
  */
-public class HibernateDAOFactory extends DAOFactory
-{
-    public CustomerDAO getCustomerDAO()
-    {
+public class HibernateDAOFactory extends DAOFactory {
+
+    public UserDAO getUserDAO() {
+        return new HibernateUserDAO();
+    }
+
+    public CustomerDAO getCustomerDAO() {
         return new HibernateCustomerDAO();
     }
-    public AccountDAO getAccountDAO()
-    {
+
+    public AccountDAO getAccountDAO() {
         return new HibernateAccountDAO();
     }
-    public TransferDAO getHistoryDAO()
-    {
+
+    public TransferDAO getHistoryDAO() {
         return new HibernateTransferDAO();
     }
 }
