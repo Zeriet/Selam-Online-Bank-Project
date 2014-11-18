@@ -19,4 +19,5 @@ interface GenericDAO< T, ID extends Serializable> {
     void beginTransaction();
 
     void commitTransaction();
+   
 }

@@ -19,10 +19,14 @@ public class CustomerService {
     DAOFactory factory = DAOFactory.getFactory();
     CustomerDAO custDao = factory.getCustomerDAO();
 
-    public void save(Customer customer) {
+    public int save(Customer customer) {
 
         custDao.beginTransaction();
         custDao.save(customer);
+        System.out.println(".........Registering......"+ customer.getFirstName()+"..with ID.........." + customer.getCustomerId() );
+
         custDao.commitTransaction();
+        
+        return Long.valueOf(customer.getCustomerId()).intValue();
     }
 }

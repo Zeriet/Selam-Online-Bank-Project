@@ -16,7 +16,7 @@ public class BankingManager
 		
 		Customer cust1 = new Customer();
 		cust1.setFirstName("Francis");
-		cust1.setLastName("Joseph");
+		cust1.setLastName("Josep");
 		cust1.setEmail("cesc.joseph@gmail.com");
 		cust1.setZipCode(52557);
 		cust1.setState("Iowa");
@@ -38,8 +38,11 @@ public class BankingManager
                 transfer.setAccount(acct);
 		
 		custDao.save(cust1);
+                System.out.println(".........KKKKKKKKKKKKKKKKKKKK......"+cust1.getCustomerId()+cust1.getLastName());
 		acctDao.save(acct);
                 histDao.save(transfer);
+                
+                
 		
 		custDao.commitTransaction();
 	}

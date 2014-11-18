@@ -40,7 +40,7 @@
                 <p:layoutUnit position="center">
                     <h2>Registration Form</h2>
                     <h:form>
-                        <p:fieldset legend="Registration Form" widgetVar="regWidget" style="width: 600px;">
+                        <p:fieldset legend="Customer Details" widgetVar="regWidget" style="width: 400px;">
                             <h:panelGrid columns="3" width="550" border="0">
 
                                 <!--user name and password discussion-->
@@ -60,7 +60,7 @@
                                 <p:inputText value="#{customerBean.customer.lastName}"
                                              id="lastName"></p:inputText>
                                 <p:message for="lastName" />
-                                
+
 
                                 <p:outputLabel for="birthdate" value="Date of Birth" />
                                 <p:calendar id="birthdate" value="#{customerBean.customer.birthdate}"
@@ -69,10 +69,10 @@
                                             yearRange="c-100:c-16"
                                             validatorMessage="Year shpule be in MM/dd/yyyy format"
                                             pattern="MM/dd/yyyy"  >
-                                  <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </p:calendar> 
                                 <p:message for="birthdate" />
-                                
+
 
 
                                 <h:outputLabel value="Gender" />
@@ -114,12 +114,47 @@
                                     <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   
                                 </p:inputText>
                                 <p:message for="email" />
-                                
-                                <p:commandButton value="Register" action="#{customerBean.register}" ajax="false"/>
-                                                                    
-                                <!--the action should create customerID-->
                             </h:panelGrid>
+                            </p:fieldset>
+                            <p:fieldset legend="Account Form" widgetVar="regWidget" style="width: 400px;">
+
+                                <h:panelGrid columns="3" width="550" border="0">
+
+                                    <h:outputLabel value="AccountType" />
+                                    <h:selectOneRadio id="accountType" 
+                                                      value="#{customerBean.account.accountType}" >
+                                        <f:selectItem itemValue="Checking" itemLabel="Checking" />
+                                        <f:selectItem itemValue="Saving" itemLabel="Saving" />
+                                    </h:selectOneRadio>
+                                    <p:message for="accountType" />
+
+
+                                    <h:outputLabel value="cardNumber" />
+                                    <p:inputText value="#{customerBean.account.cardNumber}"
+                                                 id="cardNumber"
+                                                 required="true"                                             
+                                                 validatorMessage="CardNumber should be between 300 and 400"
+                                                 >
+                                        <f:validateDoubleRange minimum="300" maximum="400" />
+                                    </p:inputText>
+                                    <p:message for="cardNumber" /> 
+
+
+                                    <h:outputLabel value="balance" />
+                                    <p:inputText value="#{customerBean.account.balance}"
+                                                 id="balance"
+                                                 required="true"                                             
+                                                 validatorMessage="Initial balance deposit should be between 100 and 5000 USD"
+                                                 >
+                                        <f:validateDoubleRange minimum="100.00" maximum="5000.00" />
+                                    </p:inputText>
+                                    <p:message for="balance" />
+                                    </h:panelGrid>
+                                
+                                    <!--the action should create customerID-->
+                                
                         </p:fieldset>
+                         <p:commandButton value="Register" action="#{customerBean.register}" ajax="false"/>
                     </h:form>
                 </p:layoutUnit>
             </p:layout>

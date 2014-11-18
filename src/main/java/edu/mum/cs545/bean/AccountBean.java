@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.mum.cs545.bean;
 
 import edu.mum.cs545.model.Account;
+import edu.mum.cs545.service.AccountService;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-
 
 /**
  *
@@ -19,8 +18,10 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class AccountBean implements Serializable {
-    
- private Account account = new Account();   
+
+    private Account account = new Account();
+    private AccountService accService = new AccountService();
+   
 
     public Account getAccount() {
         return account;
@@ -29,7 +30,13 @@ public class AccountBean implements Serializable {
     public void setAccount(Account account) {
         this.account = account;
     }
- 
-  
+
+    public void accountCreate() {
+
+        account.setAccountNumber(accService.accountNumber());
+        account.setPIN(accService.generatePIN());
+
+    }
     
+
 }

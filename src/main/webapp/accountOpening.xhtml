@@ -39,7 +39,49 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Welcome to PrimeFaces
+                    <h2>Registration Form</h2>
+                    <h:form>
+                        <p:fieldset legend="Registration Form" widgetVar="regWidget" style="width: 600px;">
+                            <h:panelGrid columns="3" width="550" border="0">
+
+                                <!--user name and password discussion-->
+
+
+                                <h:outputLabel value="AccountType" />
+                                <h:selectOneRadio id="accountType" 
+                                                  value="#{accountBean.account.accountType}" >
+                                    <f:selectItem itemValue="Checking" itemLabel="Checking" />
+                                    <f:selectItem itemValue="Saving" itemLabel="Saving" />
+                                </h:selectOneRadio>
+                                <p:message for="accountType" />
+                                
+
+                                <h:outputLabel value="cardNumber" />
+                                <p:inputText value="#{accountBean.account.cardNumber}"
+                                             id="cardNumber"
+                                             required="true"                                             
+                                             validatorMessage="CardNumber should be between 300 and 400"
+                                             >
+                                    <f:validateDoubleRange minimum="300" maximum="400" />
+                                </p:inputText>
+                                <p:message for="cardNumber" /> 
+                                
+
+                                <h:outputLabel value="balance" />
+                                <p:inputText value="#{accountBean.account.balance}"
+                                             id="balance"
+                                             required="true"                                             
+                                             validatorMessage="Initial balance deposit should be between 100 and 5000 USD"
+                                             >
+                                    <f:validateDoubleRange minimum="100.00" maximum="5000.00" />
+                                </p:inputText>
+                                <p:message for="balance" />
+
+                                
+
+                            </h:panelGrid>
+                        </p:fieldset>
+                    </h:form>
                 </p:layoutUnit>
 
             </p:layout>
