@@ -21,6 +21,16 @@ public class AccountBean implements Serializable {
 
     private Account account = new Account();
     private AccountService accService = new AccountService();
+    private String deactivateAccount;
+
+    public String getDeactivateAccount() {
+        return deactivateAccount;
+    }
+
+    public void setDeactivateAccount(String deactivateAccount) {
+        this.deactivateAccount = deactivateAccount;
+    }
+    
    
 
     public Account getAccount() {
@@ -31,12 +41,5 @@ public class AccountBean implements Serializable {
         this.account = account;
     }
 
-    public void accountCreate() {
-
-        account.setAccountNumber(accService.accountNumber());
-        account.setPIN(accService.generatePIN());
-
-    }
     
-
 }

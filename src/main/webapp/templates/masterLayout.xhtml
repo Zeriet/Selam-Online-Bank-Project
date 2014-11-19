@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:head>
+        <script type="text/javascript" src="resources/js/jquery-2.1.1.min.js" />
+         <link href="resources/css/bootstrap.css" rel="stylesheet"></link>
+         <script type="text/javascript" src="resources/js/bootstrap.js" />
+         
+         <script type="text/javascript" src="resources/js/jquery.flexslider.js" />
+         <link href="resources/css/flexslider.css" rel="stylesheet"></link>
+         
+         
+         <link href="resources/css/style.css" rel="stylesheet"></link>
+         
+        <title><ui:insert name="windowTitle"/></title>
+
+    </h:head>
+
+    <h:body>  
+
+        <div class="container">
+            <div class="row">
+                
+                
+                <div class="col-lg-12">
+                <ui:insert name="heading">
+                    <ui:include src="/sections/public/header.xhtml"/>
+                </ui:insert>
+                <ui:insert name="topmenu">
+                    <ui:include src="/sections/public/mainMenu.xhtml"/>
+                </ui:insert>
+                </div>
+                <div class="col-lg-3">
+                <ui:insert name="sidebarLeft">
+                    <ui:include src="/sections/public/sidebarLeft.xhtml"/>
+                </ui:insert>
+                </div>
+                <div class="col-lg-9">
+                  
+                <ui:insert name="content">
+                   
+                </ui:insert>
+                </div>
+                <div class="col-lg-12">
+                <ui:insert name="footer">
+                    <ui:include src="/sections/public/footer.xhtml"/>
+                </ui:insert>
+                </div>
+        
+            <ui:debug/>
+            </div>
+            </div>
+    </h:body>
+</html>

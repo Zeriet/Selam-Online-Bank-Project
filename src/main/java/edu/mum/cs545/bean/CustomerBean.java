@@ -6,6 +6,7 @@
 package edu.mum.cs545.bean;
 
 import edu.mum.cs545.MailSender;
+import edu.mum.cs545.Messages;
 
 import edu.mum.cs545.model.*;
 import edu.mum.cs545.service.AccountService;
@@ -42,9 +43,19 @@ public class CustomerBean implements Serializable {
     private CustomerService custService = new CustomerService();
     private AccountService accService = new AccountService();
     private MailSender mailsend = new MailSender();
+    private Messages msgs=new Messages();
 
     private Customer customer = new Customer();
     private Account account = new Account();
+
+    public Messages getMsgs() {
+        return msgs;
+    }
+
+    public void setMsgs(Messages msgs) {
+        this.msgs = msgs;
+    }
+    
 
     public Account getAccount() {
         return account;
@@ -67,10 +78,13 @@ public class CustomerBean implements Serializable {
         account.setCustomer(customer);
 
         int custId = custService.save(customer); // thsi customer Id is used to generate unique account Number
+        
+
+        account.setPIN(accService.generatePIN());        
         account.setAccountNumber(Long.valueOf(accountNoStart+custId));// setting account number
         accService.save(account);
 
-        return "faces/RegistrationSuccess";
+        return "faces/registrationSummary";
 
     }
 

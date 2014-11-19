@@ -9,54 +9,47 @@
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Online Banking</title>
+                <title>#{customerBean.msgs.title}</title>
             </f:facet>
         </h:head>
+
         <h:body>
 
-            <p:layout fullPage="true">
+            <ui:composition template="/templates/masterLayout.xhtml">
+                <ui:define name="windowTitle">
+                  #{customerBean.msgs.title}
+                </ui:define>
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
+                <ui:define name="heading">
+                    <ui:include src="/sections/public/header.xhtml"/>
+                </ui:define>
+                <ui:define name="topmenu">
+                    <ui:include src="/sections/public/mainMenu.xhtml"/>
+                </ui:define>
+                <ui:define name="sidebarLeft">
+                    <ui:include src="/sections/public/sidebarLeft.xhtml"/>
+                </ui:define>
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                    <h2>Registration Form</h2>
+                <ui:define name="content">
+                    <h2>#{customerBean.msgs.refistrationForm}</h2>
                     <h:form>
                         <p:fieldset legend="Customer Details" widgetVar="regWidget" style="width: 400px;">
                             <h:panelGrid columns="3" width="550" border="0">
 
                                 <!--user name and password discussion-->
 
-                                <h:outputLabel value="FirstName" />
+                                <h:outputLabel value="First Name" />
                                 <p:inputText value="#{customerBean.customer.firstName}"
                                              id="firstName"
                                              required="true" 
                                              requiredMessage="FirstName is required"
                                              validatorMessage="FirstName should be of length from 5 to 15 chars"
                                              >
-                                    <f:validateLength minimum="5" maximum="15" for="firstName"></f:validateLength>
+                                    <f:validateLength minimum="2" maximum="25" for="firstName"></f:validateLength>
                                 </p:inputText>
                                 <p:message for="firstName" />
 
-                                <h:outputLabel value="LastName" />
+                                <h:outputLabel value="Last Name" />
                                 <p:inputText value="#{customerBean.customer.lastName}"
                                              id="lastName"></p:inputText>
                                 <p:message for="lastName" />
@@ -83,7 +76,19 @@
                                 </h:selectOneRadio>
                                 <p:message for="gender" />
 
-                                <h:outputLabel value="ZipCode" />
+
+                                <h:outputLabel value="Street" />
+                                <p:inputText value="#{customerBean.customer.street}"
+                                             id="street"
+                                             required="true" 
+                                             requiredMessage="Street is required"
+                                             validatorMessage="Street should be of length from 4 to 35 chars"
+                                             >
+                                    <f:validateLength minimum="4" maximum="15" for="street"></f:validateLength>
+                                </p:inputText>
+                                <p:message for="street" />
+
+                                <h:outputLabel value="Zip Code" />
                                 <p:inputText value="#{customerBean.customer.zipCode}"
                                              id="zipCode"
                                              required="true" 
@@ -95,16 +100,17 @@
                                 <p:message for="zipCode" />
 
 
-                                <h:outputLabel value="Street" />
-                                <p:inputText value="#{customerBean.customer.street}"
-                                             id="street"
+
+                                <h:outputLabel value="State" />
+                                <p:inputText value="#{customerBean.customer.state}"
+                                             id="state"
                                              required="true" 
-                                             requiredMessage="Street is required"
-                                             validatorMessage="Street should be of length from 4 to 25 chars"
+                                             requiredMessage="state is required"
+                                             validatorMessage="State should be of length 2 letters "
                                              >
-                                    <f:validateLength minimum="4" maximum="15" for="street"></f:validateLength>
+                                    <f:validateLength minimum="2" maximum="2" for="state"></f:validateLength>
                                 </p:inputText>
-                                <p:message for="street" />
+                                <p:message for="state" />
 
 
                                 <h:outputLabel value="Email" />
@@ -115,52 +121,59 @@
                                 </p:inputText>
                                 <p:message for="email" />
                             </h:panelGrid>
-                            </p:fieldset>
-                            <p:fieldset legend="Account Form" widgetVar="regWidget" style="width: 400px;">
-
-                                <h:panelGrid columns="3" width="550" border="0">
-
-                                    <h:outputLabel value="AccountType" />
-                                    <h:selectOneRadio id="accountType" 
-                                                      value="#{customerBean.account.accountType}" >
-                                        <f:selectItem itemValue="Checking" itemLabel="Checking" />
-                                        <f:selectItem itemValue="Saving" itemLabel="Saving" />
-                                    </h:selectOneRadio>
-                                    <p:message for="accountType" />
-
-
-                                    <h:outputLabel value="cardNumber" />
-                                    <p:inputText value="#{customerBean.account.cardNumber}"
-                                                 id="cardNumber"
-                                                 required="true"                                             
-                                                 validatorMessage="CardNumber should be between 300 and 400"
-                                                 >
-                                        <f:validateDoubleRange minimum="300" maximum="400" />
-                                    </p:inputText>
-                                    <p:message for="cardNumber" /> 
-
-
-                                    <h:outputLabel value="balance" />
-                                    <p:inputText value="#{customerBean.account.balance}"
-                                                 id="balance"
-                                                 required="true"                                             
-                                                 validatorMessage="Initial balance deposit should be between 100 and 5000 USD"
-                                                 >
-                                        <f:validateDoubleRange minimum="100.00" maximum="5000.00" />
-                                    </p:inputText>
-                                    <p:message for="balance" />
-                                    </h:panelGrid>
-                                
-                                    <!--the action should create customerID-->
-                                
                         </p:fieldset>
-                         <p:commandButton value="Register" action="#{customerBean.register}" ajax="false"/>
+                        <p:fieldset legend="Account Form" widgetVar="regWidget" style="width: 400px;">
+
+                            <h:panelGrid columns="3" width="550" border="0">
+
+                                <h:outputLabel value="AccountType" />
+                                <h:selectOneRadio id="accountType" 
+                                                  value="#{customerBean.account.accountType}" >
+                                    <f:selectItem itemValue="Checking" itemLabel="Checking" />
+                                    <f:selectItem itemValue="Saving" itemLabel="Saving" />
+                                </h:selectOneRadio>
+                                <p:message for="accountType" />
+
+
+                                <h:outputLabel value="cardNumber" />
+                                <p:inputText value="#{customerBean.account.cardNumber}"
+                                             id="cardNumber"
+                                             required="true"                                             
+                                             validatorMessage="CardNumber should be between 300 and 400"
+                                             >
+                                    <f:validateDoubleRange minimum="300" maximum="400" />
+                                </p:inputText>
+                                <p:message for="cardNumber" /> 
+
+
+                                <h:outputLabel value="balance" />
+                                <p:inputText value="#{customerBean.account.balance}"
+                                             id="balance"
+                                             required="true"                                             
+                                             validatorMessage="Initial balance deposit should be between 100 and 5000 USD"
+                                             >
+                                    <f:validateDoubleRange minimum="100.00" maximum="5000.00" />
+                                </p:inputText>
+                                <p:message for="balance" />
+                            </h:panelGrid>
+
+                            <!--the action should create customerID-->
+
+                        </p:fieldset>
+                        <p:commandButton value="Register" action="#{customerBean.register}" ajax="false"/>
                     </h:form>
-                </p:layoutUnit>
-            </p:layout>
+                </ui:define>
+                <ui:define name="footer">
+                    <ui:include src="/sections/public/footer.xhtml"/>
+                </ui:define>
+            </ui:composition>
+
+
+
 
         </h:body>
 
     </f:view>
 </html>
+
 

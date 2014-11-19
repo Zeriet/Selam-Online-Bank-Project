@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Online Banking</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+
+            <ui:composition template="/templates/masterLayout.xhtml">
+
+
+                <h2>Registration Form</h2>
+                <h:form>
+                    <p:outputPanel id="panel"> 
+
+                        <table style="width:50%">
+                            <tr>
+                                <td> First Name</td> <td> #{customerBean.customer.firstName}</td>
+                            </tr>
+                            <tr>
+                                <td> Last Name</td> <td> #{customerBean.customer.lastName}</td>  
+                            </tr>                               
+                            <tr>
+                                <td> Street</td> <td> #{customerBean.customer.street}</td>  
+                            </tr>
+                            <tr>
+                                <td> Zip Code</td> <td> #{customerBean.customer.zipCode}</td>  
+                            </tr>
+                            <tr>
+                                <td> State</td> <td> #{customerBean.customer.state}</td>  
+                            </tr>
+
+                            <tr>
+                                <td> Checking account Number</td> <td> #{customerBean.account.accountNumber}</td>  
+                            </tr>
+                            <tr>
+                                <td> PIN Number</td> <td> #{customerBean.account.PIN}</td>  
+                            </tr>                          
+                        </table>
+                    </p:outputPanel>
+
+                    <h:commandButton id="btn2" value="Print">
+                        <p:printer target="panel" />
+                    </h:commandButton>
+
+
+                    <p:commandButton value="Back" action="customerRegistration" ajax="false"/>
+                </h:form>
+
+
+            </ui:composition>
+        </h:body>
+
+    </f:view>
+</html>
+

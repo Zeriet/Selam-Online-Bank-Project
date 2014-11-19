@@ -23,6 +23,9 @@ public class Account {
     private int cardNumber;
     private Customer customer;
     private List<Transfer> transfers;
+    private boolean status=true;
+    
+    
 
     @Id
     public Long getAccountNumber() {
@@ -83,8 +86,14 @@ public class Account {
     public void setCardNumber(int cardNumber) {
         this.cardNumber = cardNumber;
     }
-    
-    
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
     
     
 }
