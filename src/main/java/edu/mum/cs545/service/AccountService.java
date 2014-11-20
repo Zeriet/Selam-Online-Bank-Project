@@ -5,7 +5,6 @@
  */
 package edu.mum.cs545.service;
 
-import edu.mum.cs545.bean.*;
 import edu.mum.cs545.dao.AccountDAO;
 import edu.mum.cs545.dao.CustomerDAO;
 import edu.mum.cs545.dao.DAOFactory;
@@ -20,7 +19,7 @@ import java.util.*;
 public class AccountService {
 
     DAOFactory factory = DAOFactory.getFactory();
-    private AccountDAO accountDAO;
+    AccountDAO accountDAO = factory.getAccountDAO();
 
     public Long accountNumber() {
 
@@ -41,37 +40,60 @@ public class AccountService {
         accDao.commitTransaction();
     }
 
-    public void savingsCreator(Account account) {
+    public String savingsCreator(Customer cust, double amt) {
         //generate account number.
         AccountDAO accDao = factory.getAccountDAO();
-        accDao.beginTransaction();
-        accDao.save(account);
-        accDao.commitTransaction();
-    }
-
-    public List<Account> customerAccountsList(Long id) {
-        //we have the customer, we find by example and we return the list of all his accounts
         CustomerDAO custDao = factory.getCustomerDAO();
-        custDao.beginTransaction();
-        Customer cust = (Customer) custDao.findByPrimaryKey(id);
-        System.out.println(cust.getEmail() + " " + cust.getCustomerId());
-        List<Account> accts = cust.getAccounts();
-        custDao.commitTransaction();
+        accDao.beginTransaction();
+        String result = "";
+
+        Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
+        int CurrentDayOfYear = localCalendar.get(Calendar.DAY_OF_YEAR);
+        int hhh = localCalendar.get(Calendar.HOUR);
+        int xxx = localCalendar.get(Calendar.MINUTE);
+        int year = localCalendar.get(Calendar.YEAR) - 2000;
+        Long acct = Long.parseLong(year + "44" + CurrentDayOfYear + hhh + xxx);
+        System.out.println("account number " + acct);
+
+        Long id = (Long) cust.getCustomerId();
+        System.out.println("cust id : " + id);
+        Customer cust1 = (Customer) custDao.findByPrimaryKey(new Long(1));
+        List accts = cust1.getAccounts();
         Iterator it = accts.iterator();
         while (it.hasNext()) {
             Account ac = (Account) it.next();
-            System.out.println("detail: " + ac.getAccountType() + " " + ac.getBalance());
-        }
+            System.out.println("Serv detail: " + ac.getAccountType() + " " + ac.getBalance());
+            if (ac.getAccountType().equalsIgnoreCase("checking")) {
+                if (ac.getBalance() > amt) {
+                    Account savings = new Account();
+                    savings.setAccountNumber(acct);
+                    savings.setAccountType("Saving");
+                    savings.setCustomer(cust);
+                    savings.setBalance(amt);
 
-        return accts;
+                    ac.setBalance(ac.getBalance() - amt);
+
+                    accDao.save(ac);
+                    accDao.save(savings); //saving instance to the database...
+                    result = "success";
+                    System.out.println("Saved savings Account");
+                } else {
+                    result = "failure";
+                    System.out.println("adsfasdasfasdfaf");
+                }
+            }
+        }
+        accDao.commitTransaction();
+        return result;
     }
 
     public Customer getCustomer(String accountNumber) {
         Account account;
         try {
+
             accountDAO.beginTransaction();
             account = accountDAO.findByPrimaryKey(new Long(accountNumber));
-            accountDAO.commitTransaction();
+//            accountDAO.commitTransaction();
         } catch (Exception e) {
             System.out.println("AccountService" + e.getMessage());
             return null;
@@ -79,6 +101,7 @@ public class AccountService {
         }
         System.out.println("Customer - Account Owner  -" + account.getCustomer().getFirstName());
         return account.getCustomer();
+
     }
 
 }
