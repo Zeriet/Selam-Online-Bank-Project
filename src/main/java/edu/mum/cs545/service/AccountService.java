@@ -18,52 +18,67 @@ import java.util.*;
  * @author zeriet
  */
 public class AccountService {
+
     DAOFactory factory = DAOFactory.getFactory();
-    
+    private AccountDAO accountDAO;
+
     public Long accountNumber() {
 
         return null;
 
     }
 
-    public int generatePIN() {        
-       //generate a 4 digit integer 1000 <10000
-       return (int)(Math.random()*9000)+1000;
+    public int generatePIN() {
+        //generate a 4 digit integer 1000 <10000
+        return (int) (Math.random() * 9000) + 1000;
 
     }
-    
+
     public void save(Account account) {
         AccountDAO accDao = factory.getAccountDAO();
         accDao.beginTransaction();
         accDao.save(account);
         accDao.commitTransaction();
     }
-    
+
     public void savingsCreator(Account account) {
         //generate account number.
         AccountDAO accDao = factory.getAccountDAO();
         accDao.beginTransaction();
         accDao.save(account);
-        accDao.commitTransaction();        
+        accDao.commitTransaction();
     }
-    
-    public List<Account> customerAccountsList(Long id)
-    {
+
+    public List<Account> customerAccountsList(Long id) {
         //we have the customer, we find by example and we return the list of all his accounts
         CustomerDAO custDao = factory.getCustomerDAO();
         custDao.beginTransaction();
-        Customer cust = (Customer)custDao.findByPrimaryKey(id);
-        System.out.println(cust.getEmail() +" "+cust.getCustomerId());
+        Customer cust = (Customer) custDao.findByPrimaryKey(id);
+        System.out.println(cust.getEmail() + " " + cust.getCustomerId());
         List<Account> accts = cust.getAccounts();
         custDao.commitTransaction();
         Iterator it = accts.iterator();
-        while(it.hasNext())
-        {
-            Account ac = (Account)it.next();
-            System.out.println("detail: "+ac.getAccountType() + " "+ac.getBalance());
+        while (it.hasNext()) {
+            Account ac = (Account) it.next();
+            System.out.println("detail: " + ac.getAccountType() + " " + ac.getBalance());
         }
-        
+
         return accts;
+    }
+
+    public Customer getCustomer(String accountNumber) {
+        Account account;
+        try {
+            accountDAO.beginTransaction();
+            account = accountDAO.findByPrimaryKey(new Long(accountNumber));
+            accountDAO.commitTransaction();
+        } catch (Exception e) {
+            System.out.println("AccountService" + e.getMessage());
+            return null;
+
+        }
+        System.out.println("Customer - Account Owner  -" + account.getCustomer().getFirstName());
+        return account.getCustomer();
     }
 
 }

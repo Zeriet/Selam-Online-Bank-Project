@@ -2,71 +2,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
       xmlns:p="http://primefaces.org/ui">
 
     <f:view contentType="text/html">
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Online Banking</title>
+                <title> #{customerBean.msgs.title}</title>
             </f:facet>
         </h:head>
 
         <h:body>
 
-            <p:layout fullPage="true">
+            <ui:composition template="/templates/masterLayout.xhtml">
+                <ui:define name="windowTitle">
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
-
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
+                </ui:define>
+                <ui:define name="content">
                     <h:form id="loginForm">
                         <p:growl id="msg" showDetail="true" life="30000" />
-                        <p:panel header="Login" style="width: 400px;">
-
-                            <h:panelGrid id="loginPanel" columns="2">
+                        <p:panel header="Login" style="width: 600px;">
+                            <h:panelGrid id="loginPanel" columns="3">
 
                                 <h:outputText value="Username :" />
                                 <p:inputText id="username" value="#{loginBean.uname}" ></p:inputText>
+                                <p:spacer><h:outputText value="(Account Number)" style="font-style: italic" /></p:spacer>
                                 <p:spacer></p:spacer>
                                 <p:message for="username" ></p:message>
+                                <p:spacer></p:spacer>
 
                                 <h:outputText value="Password :" />
                                 <p:password id="password" value="#{loginBean.password}"  feedback="false"></p:password>
+                                <p:spacer><h:outputText value="(PIN Code)" style="font-style: italic" /></p:spacer>
                                 <p:spacer></p:spacer>
                                 <p:message for="password"></p:message>
+                                <p:spacer></p:spacer>
 
                                 <p:spacer></p:spacer>
-                                <p:commandButton action="#{loginBean.loginProject}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+                                <h:commandButton action="#{loginBean.login()}" value="Login" />
 
                             </h:panelGrid>
 
                         </p:panel>
                     </h:form>
-                  
-                </p:layoutUnit>
-
-            </p:layout>
-
+                </ui:define>
+            </ui:composition>
         </h:body>
 
     </f:view>
