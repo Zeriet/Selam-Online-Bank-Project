@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.mail.Address;
+
 
 /**
  *
@@ -27,7 +27,6 @@ import javax.mail.Address;
  */
 @Named
 @SessionScoped
-
 public class CustomerBean implements Serializable {
 
    
@@ -77,7 +76,7 @@ public class CustomerBean implements Serializable {
         account.setAccountNumber(Long.valueOf(accountNoStart+custId));// setting account number
         accService.save(account);
 
-        return "faces/registrationSummary";
+        return "registrationSummary.faces";
 
     }
 

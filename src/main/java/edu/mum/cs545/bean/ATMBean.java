@@ -68,6 +68,6 @@ public class ATMBean implements Serializable
     {
         status = atmServ.depositHelper(acct, amount);
         
-        return "faces/welcome";
+        return "welcome.faces";
     }
 }

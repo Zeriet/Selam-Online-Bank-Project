@@ -81,8 +81,9 @@ public class AccountBean implements Serializable
         Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
         int CurrentDayOfYear = localCalendar.get(Calendar.DAY_OF_YEAR);
         int xxx = localCalendar.get(Calendar.MINUTE);
+        int hhh = localCalendar.get(Calendar.HOUR);
         int year = localCalendar.get(Calendar.YEAR)-2000;
-        Long acct = Long.parseLong(year+"44"+CurrentDayOfYear+xxx);
+        Long acct = Long.parseLong(year+"44"+CurrentDayOfYear+hhh+xxx);
         savings.setAccountNumber(acct);
         savings.setAccountType("Saving");
         
@@ -105,11 +106,11 @@ public class AccountBean implements Serializable
                 {
                     savings.setBalance(amount); //set savings balance to this
                     acctServ.savingsCreator(savings);
-                    return "faces/welcome";
+                    return "";
                 }
             }
         }
-        return "faces/savingsAccount";
+        return "";
     }
 
 }

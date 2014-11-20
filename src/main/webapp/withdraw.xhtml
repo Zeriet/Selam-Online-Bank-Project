@@ -31,10 +31,23 @@
                                 <h:outputText value="Withdraw Amount:" />
                                 <h:inputText value="#{atm.amount}" />
                                 
+<!--                                
+                                <h:outputText value="Withdraw Amount:" /> 
+                                <p:inputText value="{atm.amount}"
+                                             id="withdraw"
+                                             required="true"                                             
+                                             validatorMessage="Withdraw can not be more than 500USD"
+                                             >
+                                    <f:validateDoubleRange minimum="10.00" maximum="500.00" />
+                                </p:inputText>
+                                <p:message for="withdraw" />-->
+                                
+                                
+                                
                                 <h:outputText value="PIN :" />
                                 <h:inputSecret value="#{atm.pin}" />
                             </h:panelGrid>
-                            <p:commandButton value="Make Withdraw" action="#{atm.makeWithdraw}" />
+                            <h:commandButton value="Make Withdraw" action="#{atm.makeWithdraw}" />
                         </p:fieldset>
                     </h:form>
                 </ui:define>

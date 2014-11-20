@@ -15,7 +15,7 @@
 
         <h:body>
 
-            <ui:composition template="/templates/masterLayout.xhtml">
+            <ui:composition template="/templates/masterLayout_date.xhtml">
                 <ui:define name="windowTitle">
                   #{customerBean.msgs.title}
                 </ui:define>
@@ -31,12 +31,12 @@
                 </ui:define>
 
                 <ui:define name="content">
-                    <h2>#{customerBean.msgs.refistrationForm}</h2>
+                   
                     <h:form>
-                        <p:fieldset legend="Customer Details" widgetVar="regWidget" style="width: 400px;">
-                            <h:panelGrid columns="3" width="550" border="0">
+                        <p:fieldset legend="Customer Registration" widgetVar="regWidget">
+                            <h:panelGrid columns="3" width="800" border="0">
 
-                                <!--user name and password discussion-->
+                               
 
                                 <h:outputLabel value="First Name" />
                                 <p:inputText value="#{customerBean.customer.firstName}"
@@ -63,6 +63,7 @@
                                             validatorMessage="Year shpule be in MM/dd/yyyy format"
                                             pattern="MM/dd/yyyy"  >
                                     <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    
                                 </p:calendar> 
                                 <p:message for="birthdate" />
 
@@ -82,10 +83,8 @@
                                              id="street"
                                              required="true" 
                                              requiredMessage="Street is required"
-                                             validatorMessage="Street should be of length from 4 to 35 chars"
                                              >
-                                    <f:validateLength minimum="4" maximum="15" for="street"></f:validateLength>
-                                </p:inputText>
+                              </p:inputText>
                                 <p:message for="street" />
 
                                 <h:outputLabel value="Zip Code" />
@@ -121,8 +120,7 @@
                                 </p:inputText>
                                 <p:message for="email" />
                             </h:panelGrid>
-                        </p:fieldset>
-                        <p:fieldset legend="Account Form" widgetVar="regWidget" style="width: 400px;">
+                        
 
                             <h:panelGrid columns="3" width="550" border="0">
 
@@ -157,7 +155,7 @@
                                 <p:message for="balance" />
                             </h:panelGrid>
 
-                            <!--the action should create customerID-->
+                         
 
                         </p:fieldset>
                         <p:commandButton value="Register" action="#{customerBean.register}" ajax="false"/>

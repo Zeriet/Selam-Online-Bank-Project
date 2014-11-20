@@ -20,7 +20,7 @@ public class Customer {
     private String lastName;
     private String email;
     private Date birthdate;
-    private String gender;
+    private String gender="M";
     private int zipCode;
     private String street;
     private String state;

@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class Account {
     
     private Long accountNumber;
-    private String accountType;
+    private String accountType ="Checking";
     private double balance;
     private int PIN;
     private int cardNumber;
@@ -41,7 +41,7 @@ public class Account {
         this.customer = customer;
     }
     
-    @OneToMany(mappedBy="accountFrom", targetEntity=Transfer.class, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="accountFrom", targetEntity=Transfer.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public List<Transfer> getTransfers() {
         return transfers;
     }
@@ -50,7 +50,7 @@ public class Account {
         this.transfers = transfers;
     }
 
-    @OneToMany(mappedBy="accountTo", targetEntity=Transfer.class, cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="accountTo", targetEntity=Transfer.class, cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public List<Transfer> getTransfersTo() {
         return transfersTo;
     }
