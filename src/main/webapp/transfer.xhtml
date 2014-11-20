@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title> #{customerBean.msgs.title}</title>
+            </f:facet>
+        </h:head>
+       
+        <h:body>
+
+            <ui:composition template="/templates/masterLayout.xhtml">
+                <ui:define name="windowTitle">
+                 
+                </ui:define>
+                <ui:define name="content">
+                    <h:form>
+                        <p:fieldset legend="Money Transfer" toggleable="true" toggleSpeed="500">
+                            <p:ajax event="toggle" listener="#{pfb.handleToggle}" />
+                            <h:outputText value="#{tranfer.output}" />
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Enter Account Number:" />
+                                <h:inputText value="#{transfer.acctFrom}" />
+                                
+                                <h:outputText value="Enter AccountTo Number:" />
+                                <h:inputText value="#{transfer.acctTo}" />
+                                
+                                <h:outputText value="Transfer Amount:" />
+                                <h:inputText value="#{transfer.amount}" />
+                                
+                                <h:outputText value="Transfer Description" />
+                                <h:inputTextarea value="#{transfer.description}" />
+                            </h:panelGrid>
+                            <h:commandButton value="Make Transfer" action="#{transfer.makeTransfer}" />
+                        </p:fieldset>
+                    </h:form>
+                    
+                </ui:define>
+            </ui:composition>
+        </h:body>
+
+    </f:view>
+</html>
+

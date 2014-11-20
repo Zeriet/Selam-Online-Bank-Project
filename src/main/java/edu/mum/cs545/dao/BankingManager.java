@@ -10,7 +10,7 @@ public class BankingManager
 		DAOFactory factory = DAOFactory.getFactory();
 		CustomerDAO custDao = factory.getCustomerDAO();
 		AccountDAO acctDao = factory.getAccountDAO();
-                TransferDAO histDao = factory.getHistoryDAO();
+                TransferDAO histDao = factory.getTransferDAO();
 		
 		custDao.beginTransaction();
 		
@@ -34,12 +34,11 @@ public class BankingManager
                 Transfer transfer = new Transfer();
                 transfer.setTransferDate(new Date());
                 transfer.setTransferAmount(5000);
-                transfer.setAccountTo(147852);
-                transfer.setAccount(acct);
+//                transfer.setAccountTo(new Long(17234));
+                transfer.setAccountFrom(acct);
 		
 		custDao.save(cust1);
-                System.out.println(".........KKKKKKKKKKKKKKKKKKKK......"+cust1.getCustomerId()+cust1.getLastName());
-		acctDao.save(acct);
+        	acctDao.save(acct);
                 histDao.save(transfer);
                 
                 

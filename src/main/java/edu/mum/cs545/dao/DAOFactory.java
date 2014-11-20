@@ -27,5 +27,5 @@ public abstract class DAOFactory {
 
     public abstract AccountDAO getAccountDAO();
 
-    public abstract TransferDAO getHistoryDAO();
+    public abstract TransferDAO getTransferDAO();
 }

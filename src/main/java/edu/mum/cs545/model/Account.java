@@ -6,7 +6,7 @@
 
 package edu.mum.cs545.model;
 
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
 
 /**
@@ -22,10 +22,9 @@ public class Account {
     private int PIN;
     private int cardNumber;
     private Customer customer;
-    private List<Transfer> transfers;
-    private boolean status=true;
-    
-    
+    private List<Transfer> transfers = new Vector<Transfer>();
+    private List<Transfer> transfersTo = new Vector<Transfer>();
+
 
     @Id
     public Long getAccountNumber() {
@@ -42,13 +41,22 @@ public class Account {
         this.customer = customer;
     }
     
-    @OneToMany(mappedBy="account", targetEntity=Transfer.class, cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="accountFrom", targetEntity=Transfer.class, cascade=CascadeType.ALL)
     public List<Transfer> getTransfers() {
         return transfers;
     }
 
     public void setTransfers(List<Transfer> transfers) {
         this.transfers = transfers;
+    }
+
+    @OneToMany(mappedBy="accountTo", targetEntity=Transfer.class, cascade=CascadeType.ALL)
+    public List<Transfer> getTransfersTo() {
+        return transfersTo;
+    }
+
+    public void setTransfersTo(List<Transfer> transfersTo) {
+        this.transfersTo = transfersTo;
     }
     
     public void setAccountNumber(Long accountNumber) {
@@ -86,14 +94,5 @@ public class Account {
     public void setCardNumber(int cardNumber) {
         this.cardNumber = cardNumber;
     }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-    
     
 }

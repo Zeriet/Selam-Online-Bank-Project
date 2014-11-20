@@ -6,7 +6,7 @@
 package edu.mum.cs545.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
 
 /**
@@ -25,10 +25,19 @@ public class Customer {
     private String street;
     private String state;
     private Long customerId;  
-    private List<Account> accounts;
+    private List<Account> accounts = new Vector<Account>();
     
-    
-    
+    public Customer(){}
+
+    public Customer(Long id, String firstName, String lastName, String email, int zipCode, String street, String state) {
+        this.customerId = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.zipCode = zipCode;
+        this.street = street;
+        this.state = state;
+    }
     
     @Id
     @GeneratedValue

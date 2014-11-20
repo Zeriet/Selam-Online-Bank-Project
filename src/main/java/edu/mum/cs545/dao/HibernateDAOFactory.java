@@ -23,7 +23,7 @@ public class HibernateDAOFactory extends DAOFactory {
         return new HibernateAccountDAO();
     }
 
-    public TransferDAO getHistoryDAO() {
+    public TransferDAO getTransferDAO() {
         return new HibernateTransferDAO();
     }
 }

@@ -19,9 +19,10 @@ public class Transfer
     private Long transferNumber;
     private Date transferDate;
     private double transferAmount;
-    private int accountTo;
+    private Account accountFrom;
+    private Account accountTo;
     private String transferDesc;
-    private Account account;
+    
     
     @Id
     @GeneratedValue
@@ -31,14 +32,22 @@ public class Transfer
     
     @ManyToOne
     @JoinColumn(name="acct_from")
-    public Account getAccount() {
-        return account;
+    public Account getAccountFrom() {
+        return accountFrom;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccountFrom(Account accountFrom) {
+        this.accountFrom = accountFrom;
     }
-    
+    @ManyToOne
+    @JoinColumn(name="accountTo")
+    public Account getAccountTo() {
+        return accountTo;
+    }
+
+    public void setAccountTo(Account accountTo) {
+        this.accountTo = accountTo;
+    }
     public void setTransferNumber(Long transferNumber) {
         this.transferNumber = transferNumber;
     }
@@ -58,14 +67,6 @@ public class Transfer
 
     public void setTransferAmount(double transferAmount) {
         this.transferAmount = transferAmount;
-    }
-
-    public int getAccountTo() {
-        return accountTo;
-    }
-
-    public void setAccountTo(int accountTo) {
-        this.accountTo = accountTo;
     }
 
     public String getTransferDesc() {

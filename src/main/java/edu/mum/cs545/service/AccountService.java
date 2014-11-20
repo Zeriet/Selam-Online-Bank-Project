@@ -7,8 +7,11 @@ package edu.mum.cs545.service;
 
 import edu.mum.cs545.bean.*;
 import edu.mum.cs545.dao.AccountDAO;
+import edu.mum.cs545.dao.CustomerDAO;
 import edu.mum.cs545.dao.DAOFactory;
 import edu.mum.cs545.model.Account;
+import edu.mum.cs545.model.Customer;
+import java.util.*;
 
 /**
  *
@@ -16,8 +19,7 @@ import edu.mum.cs545.model.Account;
  */
 public class AccountService {
     DAOFactory factory = DAOFactory.getFactory();
-    AccountDAO accDao = factory.getAccountDAO();
-
+    
     public Long accountNumber() {
 
         return null;
@@ -31,10 +33,37 @@ public class AccountService {
     }
     
     public void save(Account account) {
-
+        AccountDAO accDao = factory.getAccountDAO();
         accDao.beginTransaction();
         accDao.save(account);
         accDao.commitTransaction();
+    }
+    
+    public void savingsCreator(Account account) {
+        //generate account number.
+        AccountDAO accDao = factory.getAccountDAO();
+        accDao.beginTransaction();
+        accDao.save(account);
+        accDao.commitTransaction();        
+    }
+    
+    public List<Account> customerAccountsList(Long id)
+    {
+        //we have the customer, we find by example and we return the list of all his accounts
+        CustomerDAO custDao = factory.getCustomerDAO();
+        custDao.beginTransaction();
+        Customer cust = (Customer)custDao.findByPrimaryKey(id);
+        System.out.println(cust.getEmail() +" "+cust.getCustomerId());
+        List<Account> accts = cust.getAccounts();
+        custDao.commitTransaction();
+        Iterator it = accts.iterator();
+        while(it.hasNext())
+        {
+            Account ac = (Account)it.next();
+            System.out.println("detail: "+ac.getAccountType() + " "+ac.getBalance());
+        }
+        
+        return accts;
     }
 
 }
